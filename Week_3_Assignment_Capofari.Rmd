@@ -1,0 +1,60 @@
+---
+title: "Week 3 Assignment"
+author: "Nicholas Capofari"
+date: "July 17, 2015"
+output: html_document
+---
+
+**Mushroom Database**
+
+```{r, echo=FALSE}
+comment=NA
+
+mydata <- read.csv("agaricus-lepiota.csv", header=FALSE)
+mushrooms <- data.frame(mydata)
+colnames(mushrooms) <- c("Edible","Cap_Shape","Cap_Surface","Cap_Color","Bruises")
+
+levels(mushrooms$Edible) <- c(levels(mushrooms$Edible),"Edible","Poisonous")
+mushrooms$Edible[mushrooms$Edible == 'e'] <- 'Edible'
+mushrooms$Edible[mushrooms$Edible == 'p'] <- 'Poisonous'
+
+levels(mushrooms$Cap_Shape) <- c(levels(mushrooms$Cap_Shape),"Bell","Conical", "Convex", "Flat", "Knobbed", "Sunken")
+mushrooms$Cap_Shape[mushrooms$Cap_Shape == 'b'] <- 'Bell'
+mushrooms$Cap_Shape[mushrooms$Cap_Shape == 'c'] <- 'Conical'
+mushrooms$Cap_Shape[mushrooms$Cap_Shape == 'x'] <- 'Convex'
+mushrooms$Cap_Shape[mushrooms$Cap_Shape == 'f'] <- 'Flat'
+mushrooms$Cap_Shape[mushrooms$Cap_Shape == 'k'] <- 'Knobbed'
+mushrooms$Cap_Shape[mushrooms$Cap_Shape == 's'] <- 'Sunken'
+
+levels(mushrooms$Cap_Surface) <- c(levels(mushrooms$Cap_Surface), "Fibrous","Grooves","Scaly","Smooth")
+mushrooms$Cap_Surface[mushrooms$Cap_Surface == 'f'] <- 'Fibrous'
+mushrooms$Cap_Surface[mushrooms$Cap_Surface == 'g'] <- 'Grooves'
+mushrooms$Cap_Surface[mushrooms$Cap_Surface == 'y'] <- 'Scaly'
+mushrooms$Cap_Surface[mushrooms$Cap_Surface == 's'] <- 'Smooth'
+
+levels(mushrooms$Cap_Color) <- c(levels(mushrooms$Cap_Color), "Brown","Buff","Cinnamon","Gray","Green","Pink","Purple","Red","White","Yellow")
+mushrooms$Cap_Color[mushrooms$Cap_Color == 'n'] <- 'Brown'
+mushrooms$Cap_Color[mushrooms$Cap_Color == 'b'] <- 'Buff'
+mushrooms$Cap_Color[mushrooms$Cap_Color == 'c'] <- 'Cinnamon'
+mushrooms$Cap_Color[mushrooms$Cap_Color == 'g'] <- 'Gray'
+mushrooms$Cap_Color[mushrooms$Cap_Color == 'r'] <- 'Green'
+mushrooms$Cap_Color[mushrooms$Cap_Color == 'p'] <- 'Pink'
+mushrooms$Cap_Color[mushrooms$Cap_Color == 'u'] <- 'Purple'
+mushrooms$Cap_Color[mushrooms$Cap_Color == 'e'] <- 'Red'
+mushrooms$Cap_Color[mushrooms$Cap_Color == 'w'] <- 'White'
+mushrooms$Cap_Color[mushrooms$Cap_Color == 'y'] <- 'Yellow'
+
+levels(mushrooms$Bruises) <- c(levels(mushrooms$Bruises),"Yes","No")
+mushrooms$Bruises[mushrooms$Bruises == 't'] <- 'Yes'
+mushrooms$Bruises[mushrooms$Bruises == 'f'] <- 'No'
+
+mushrooms$Edible <- droplevels(mushrooms$Edible)
+mushrooms$Cap_Shape <- droplevels(mushrooms$Cap_Shape)
+mushrooms$Cap_Surface <- droplevels(mushrooms$Cap_Surface)
+mushrooms$Cap_Color <- droplevels(mushrooms$Cap_Color)
+mushrooms$Bruises <- droplevels(mushrooms$Bruises)
+
+my_mushrooms <- mushrooms[c("Edible", "Cap_Shape", "Cap_Surface", "Cap_Color", "Bruises")] 
+
+summary(my_mushrooms)
+```
